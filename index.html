@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Surprise Gift 🎁</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      background: radial-gradient(circle, #2c3e50, #0a0e14);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif, Arial;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      min-height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* STEP 1: GIFT BOX STYLES */
+    #step-gift {
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .gift-box {
+      width: 140px;
+      height: 120px;
+      background: #e74c3c;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    .gift-lid {
+      width: 160px;
+      height: 35px;
+      background: #c0392b;
+      position: absolute;
+      top: -30px;
+      left: -10px;
+      border-radius: 8px;
+      transition: transform 0.6s ease;
+      z-index: 2;
+    }
+
+    .gift-ribbon-vertical {
+      width: 25px;
+      height: 100%;
+      background: #f1c40f;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift-ribbon-horizontal {
+      width: 100%;
+      height: 25px;
+      background: #f1c40f;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .gift-text {
+      margin-top: 35px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #f1c40f;
+      letter-spacing: 1px;
+    }
+
+    /* STEP 2: ROOM & DOORS */
+    #step-room {
+      display: none;
+      width: 100%;
+      height: 480px;
+      perspective: 1200px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .room-frame {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border: 8px solid #3e2723;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      overflow: hidden;
+      background: #111;
+    }
+
+    .door {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, #5d4037, #3e2723);
+      position: absolute;
+      top: 0;
+      z-index: 5;
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .door-left {
+      left: 0;
+      transform-origin: left;
+      border-right: 2px solid #271611;
+    }
+
+    .door-right {
+      right: 0;
+      transform-origin: right;
+      border-left: 2px solid #271611;
+    }
+
+    .handle {
+      width: 14px;
+      height: 45px;
+      background: #f1c40f;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    }
+    .door-left .handle { margin-left: auto; margin-right: 18px; }
+    .door-right .handle { margin-right: auto; margin-left: 18px; }
+
+    .door-open-left { transform: rotateY(-110deg); }
+    .door-open-right { transform: rotateY(110deg); }
+
+    .door-prompt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 16px;
+      color: #fff;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    /* STEP 3: FOOD FEAST DISPLAY */
+    .inside-room {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #18191a;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .food-img {
+      width: 95%;
+      max-height: 340px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 3px solid #f1c40f;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .sister-msg {
+      margin-top: 15px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffda79;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 1. Gift Box -->
+    <div id="step-gift" onclick="openGift()">
+      <div class="gift-box">
+        <div class="gift-lid" id="lid">
+          <div class="gift-ribbon-vertical"></div>
+        </div>
+        <div class="gift-ribbon-vertical"></div>
+        <div class="gift-ribbon-horizontal"></div>
+      </div>
+      <div class="gift-text">Tap to Open Gift 🎁</div>
+    </div>
+
+    <!-- 2. Room with Doors & Feast -->
+    <div id="step-room" onclick="openRoom()">
+      <div class="room-frame">
+        <div class="door-prompt" id="door-hint">🚪 Tap to Open the Room</div>
+        <div class="door door-left" id="door-left">
+          <div class="handle"></div>
+        </div>
+        <div class="door door-right" id="door-right">
+          <div class="handle"></div>
+        </div>
+
+        <div class="inside-room">
+          <img class="food-img" src="feast.jpg" alt="Delicious Feast">
+          <div class="sister-msg">here eat this sister .I could only give you this gift from so far away 😅😄</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openGift() {
+      const lid = document.getElementById('lid');
+      lid.style.transform = 'translateY(-50px) rotate(-15deg)';
+      setTimeout(() => {
+        document.getElementById('step-gift').style.display = 'none';
+        document.getElementById('step-room').style.display = 'block';
+      }, 500);
+    }
+
+    function openRoom() {
+      document.getElementById('door-left').classList.add('door-open-left');
+      document.getElementById('door-right').classList.add('door-open-right');
+      const hint = document.getElementById('door-hint');
+      if (hint) hint.style.opacity = '0';
+    }
+  </script>
+
+</body>
+</html>
